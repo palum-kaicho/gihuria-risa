@@ -1,0 +1,1234 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Palmu ギフリア一覧</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --bg-gradient: linear-gradient(135deg, #ff9233 0%, #ea580c 100%);
+
+    --card-bg: #ffffff;
+    --card-text: #1e293b;
+    --sub-text: #64748b;
+
+    --btn-bg: rgba(255,255,255,.25);
+    --btn-text: #ffffff;
+    --btn-active-bg: #ffffff;
+    --btn-active-text: #ea580c;
+
+    --c300: #06b6d4;
+    --c500: #22c55e;
+    --c800: #eab308;
+    --c1000: #3b82f6;
+    --c2000: #10b981;
+    --c3000: #f59e0b;
+    --c5000: #ec4899;
+    --c10000: #8b5cf6;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family:
+        'Plus Jakarta Sans',
+        'Noto Sans JP',
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+
+    color: #ffffff;
+
+    margin: 0;
+    padding: 16px;
+
+    min-height: 100vh;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+
+    font-size: 1.7rem;
+    font-weight: 800;
+
+    letter-spacing: .05em;
+
+    margin: 8px 0 6px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.15);
+}
+
+.subtitle {
+    text-align: center;
+
+    font-size: .85rem;
+    font-weight: 600;
+
+    opacity: .85;
+
+    margin-bottom: 20px;
+}
+
+
+/* ===============================
+   FILTER
+================================ */
+
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    background: var(--btn-bg);
+    color: var(--btn-text);
+
+    border:
+        1px solid rgba(255,255,255,.4);
+
+    padding: 9px 13px;
+
+    border-radius: 999px;
+
+    font-size: .82rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        color .18s ease,
+        box-shadow .18s ease;
+
+    backdrop-filter: blur(4px);
+}
+
+.filter-btn:hover {
+    background: rgba(255,255,255,.35);
+}
+
+.filter-btn:active {
+    transform: scale(.92);
+}
+
+.filter-btn.active {
+    background: var(--btn-active-bg);
+    color: var(--btn-active-text);
+
+    border-color: #ffffff;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.15);
+}
+
+
+/* ===============================
+   GRID
+================================ */
+
+.grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(280px,1fr));
+
+    gap: 14px;
+}
+
+
+/* ===============================
+   CARD
+================================ */
+
+.card {
+    background: var(--card-bg);
+    color: var(--card-text);
+
+    border-radius: 14px;
+
+    padding: 12px;
+
+    border-left: 6px solid #ccc;
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,.12);
+
+    display: flex;
+
+    gap: 12px;
+
+    align-items: center;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+
+    animation:
+        cardIn .45s cubic-bezier(.22, 1, .36, 1) both;
+
+    will-change:
+        transform,
+        opacity;
+}
+
+
+/* ===============================
+   CARD ENTER ANIMATION
+================================ */
+
+@keyframes cardIn {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(24px)
+            scale(.96);
+    }
+
+    60% {
+        opacity: 1;
+        transform:
+            translateY(-3px)
+            scale(1.01);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@media (hover:hover) {
+
+    .card:not(.disabled):hover {
+
+        transform:
+            translateY(-4px)
+            scale(1.01);
+
+        box-shadow:
+            0 12px 26px rgba(0,0,0,.18);
+    }
+
+}
+
+
+/* ===============================
+   COIN COLOR
+================================ */
+
+.card[data-coin="300"] {
+    border-color: var(--c300);
+}
+
+.card[data-coin="500"] {
+    border-color: var(--c500);
+}
+
+.card[data-coin="800"] {
+    border-color: var(--c800);
+}
+
+.card[data-coin="1000"] {
+    border-color: var(--c1000);
+}
+
+.card[data-coin="2000"] {
+    border-color: var(--c2000);
+}
+
+.card[data-coin="3000"] {
+    border-color: var(--c3000);
+}
+
+.card[data-coin="5000"] {
+    border-color: var(--c5000);
+}
+
+.card[data-coin="10000"] {
+    border-color: var(--c10000);
+}
+
+
+/* ===============================
+   IMAGE
+================================ */
+
+.gift-img {
+    width: 68px;
+    height: 68px;
+
+    border-radius: 11px;
+
+    object-fit: cover;
+
+    background: #f1f5f9;
+
+    flex-shrink: 0;
+
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,.05);
+
+    transition:
+        filter .2s ease,
+        opacity .2s ease;
+}
+
+.no-img {
+    width: 68px;
+    height: 68px;
+
+    border-radius: 11px;
+
+    background: #f1f5f9;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #94a3b8;
+
+    font-size: .68rem;
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* ===============================
+   TEXT
+================================ */
+
+.card-body {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.card-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 8px;
+
+    margin-bottom: 7px;
+}
+
+.gift-name {
+    font-size: 1rem;
+    font-weight: 800;
+
+    color: #0f172a;
+
+    line-height: 1.3;
+}
+
+.coin-badge {
+    flex-shrink: 0;
+
+    font-size: .73rem;
+    font-weight: 800;
+
+    padding: 3px 8px;
+
+    border-radius: 12px;
+
+    background: #fff7ed;
+    color: #ea580c;
+
+    border:
+        1px solid #ffedd5;
+}
+
+.desc {
+    color: var(--sub-text);
+
+    font-size: .87rem;
+    font-weight: 500;
+
+    line-height: 1.45;
+}
+
+
+/* ===============================
+   未搭載バッジ
+================================ */
+
+.not-installed {
+    display: inline-block;
+
+    color: #6b7280;
+    background: #d1d5db;
+
+    border:
+        1px solid #cbd5e1;
+
+    padding: 3px 9px;
+
+    border-radius: 999px;
+
+    font-size: .75rem;
+    font-weight: 700;
+
+    letter-spacing: .04em;
+}
+
+
+/* ===============================
+   未搭載カード
+================================ */
+
+.card.disabled {
+    background: #e5e7eb;
+
+    border-left-color: #9ca3af !important;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.08);
+
+    opacity: .72;
+}
+
+.card.disabled .gift-img {
+    filter: grayscale(100%);
+    opacity: .65;
+}
+
+.card.disabled .no-img {
+    background: #d1d5db;
+    color: #9ca3af;
+}
+
+.card.disabled .gift-name {
+    color: #6b7280;
+}
+
+.card.disabled .coin-badge {
+    background: #d1d5db;
+    color: #6b7280;
+
+    border-color: #cbd5e1;
+}
+
+.card.disabled:hover {
+    transform: none;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.08);
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width:480px) {
+
+    body {
+        padding: 12px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 11px;
+    }
+
+    .filter-container {
+        gap: 6px;
+    }
+
+    .filter-btn {
+        padding: 8px 11px;
+        font-size: .78rem;
+    }
+
+    .gift-img,
+    .no-img {
+        width: 62px;
+        height: 62px;
+    }
+
+    .gift-name {
+        font-size: .95rem;
+    }
+
+    .desc {
+        font-size: .82rem;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<h1>ギフリア一覧</h1>
+
+<div class="subtitle">
+    ギフトを投げると何かが起こります。
+</div>
+
+
+<!-- FILTER -->
+
+<div class="filter-container">
+
+    <button
+        class="filter-btn active"
+        onclick="filterGifts('all',this)">
+        ALL
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filterGifts('300',this)">
+        300c
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filterGifts('500',this)">
+        500c
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filterGifts('800',this)">
+        800c
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filterGifts('1000',this)">
+        1000c
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filterGifts('2000',this)">
+        2000c
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filterGifts('3000',this)">
+        3000c
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filterGifts('5000',this)">
+        5000c
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filterGifts('10000',this)">
+        10000c
+    </button>
+
+</div>
+
+
+<div
+    class="grid"
+    id="gift-grid">
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   ギフリアデータ
+===================================================== */
+
+const giftData = [
+
+/* =====================================================
+   300 COIN
+===================================================== */
+
+{
+    coin: 300,
+    name: "花束",
+    desc: "清水翔太替え歌",
+    img: "09_花束.png"
+},
+
+{
+    coin: 300,
+    name: "沼る",
+    desc: "赤ちゃん扱い",
+    img: "07_沼る.png"
+},
+
+{
+    coin: 300,
+    name: "エンジョイバルーン",
+    desc: "わー！みんなー！どこいくのー！",
+    img: "06_エンジョイバルーン.png"
+},
+
+{
+    coin: 300,
+    name: "ハッピーシャワー",
+    desc: "未搭載",
+    img: "05_ハッピーシャワー.png"
+},
+
+{
+    coin: 300,
+    name: "ドン!!",
+    desc: "即興変顔",
+    img: "04_ドン.png"
+},
+
+{
+    coin: 300,
+    name: "アンコール",
+    desc: "最後にやったリアクションもう１回",
+    img: "03_アンコール.png"
+},
+
+{
+    coin: 300,
+    name: "よーいアクション",
+    desc: "えー、一発ギャグ「DIY」",
+    img: "02_よーいアクション.png"
+},
+
+{
+    coin: 300,
+    name: "爆弾",
+    desc: "頭ぐしゃぐしゃにして「どうしてくれんの」",
+    img: "01_爆弾.png"
+},
+
+{
+    coin: 300,
+    name: "サーチライト",
+    desc: "未搭載",
+    img: "サーチライト.png"
+},
+
+{
+    coin: 300,
+    name: "スポットライト",
+    desc: "未搭載",
+    img: "11_スポットライト.png"
+},
+
+{
+    coin: 300,
+    name: "乾杯",
+    desc: "○○のおしっことかんぱーい",
+    img: "10_乾杯.png"
+},
+
+
+/* =====================================================
+   500 COIN
+===================================================== */
+
+{
+    coin: 500,
+    name: "指ハート",
+    desc: "アレルギーでてめっちゃ手洗う",
+    img: "08_指ハート.png"
+},
+
+{
+    coin: 500,
+    name: "あふれる可愛い",
+    desc: "どんな言葉でも「かわいい」に変換",
+    img: "07_溢れるかわいい.png"
+},
+
+{
+    coin: 500,
+    name: "演奏たいむ",
+    desc: "未搭載",
+    img: "05_演奏たいむ_1.png"
+},
+
+{
+    coin: 500,
+    name: "ホームラン",
+    desc: "未搭載",
+    img: "04_ホームラン.png"
+},
+
+{
+    coin: 500,
+    name: "応援たいむ",
+    desc: "賢者タイム",
+    img: "03_応援たいむ.png"
+},
+
+{
+    coin: 500,
+    name: "ダイヤシャワー",
+    desc: "足つぼマット",
+    img: "02_ダイヤシャワー.png"
+},
+
+{
+    coin: 500,
+    name: "トロフィー",
+    desc: "未搭載",
+    img: "01_トロフィー.png"
+},
+
+{
+    coin: 500,
+    name: "パイ投げ",
+    desc: "避けて煽る",
+    img: "09_パイ投げ.png"
+},
+
+{
+    coin: 500,
+    name: "記者会見",
+    desc: "反省していない永野芽郁",
+    img: "08_記者会見.png"
+},
+
+{
+    coin: 500,
+    name: "推し活タイム",
+    desc: "未搭載",
+    img: "07_推しほたいむ.png"
+},
+
+
+/* =====================================================
+   800 COIN
+===================================================== */
+
+{
+    coin: 800,
+    name: "君にずきゅん",
+    desc: "ヒス起こす",
+    img: "06_君にずきゅん.png"
+},
+
+{
+    coin: 800,
+    name: "投げキッス",
+    desc: "目ガンギマリ投げキッス運動開始",
+    img: "05_投げキッス.png"
+},
+
+{
+    coin: 800,
+    name: "尊い",
+    desc: "ヒス起こす",
+    img: "04_尊い.png"
+},
+
+{
+    coin: 800,
+    name: "ミラーボール",
+    desc: "俺が関東のミラーボールになる！（前転）",
+    img: "03_ミラーボール.png"
+},
+
+{
+    coin: 800,
+    name: "大爆笑",
+    desc: "床に転がって大爆笑する",
+    img: "02_大爆笑.png"
+},
+
+{
+    coin: 800,
+    name: "ほっと一息",
+    desc: "うんち踏ん張る",
+    img: "01_ほっと一息.png"
+},
+
+
+/* =====================================================
+   1000 COIN
+===================================================== */
+
+{
+    coin: 1000,
+    name: "ちゅき",
+    desc: "3分間めちゃくちゃ優しくする",
+    img: "ちゅき.png"
+},
+
+{
+    coin: 1000,
+    name: "ハートフラワー",
+    desc: "変顔したらダメですか？（サランラップ）",
+    img: "ハフラ.png"
+},
+
+{
+    coin: 1000,
+    name: "パーティー",
+    desc: "クラブ疑似体験",
+    img: "パーティ.png"
+},
+
+{
+    coin: 1000,
+    name: "くす玉",
+    desc: "未搭載",
+    img: "くす玉.png"
+},
+
+{
+    coin: 1000,
+    name: "ケーキ（ハピバ）",
+    desc: "ハッピーバースデー（オペラver）",
+    img: "ケーキ.png"
+},
+
+{
+    coin: 1000,
+    name: "配信中",
+    desc: "オールナイトニッポン",
+    img: "配信中.png"
+},
+
+{
+    coin: 1000,
+    name: "その扉の先へ",
+    desc: "名探偵混乱",
+    img: "扉.png"
+},
+
+{
+    coin: 1000,
+    name: "一杯をどうぞ",
+    desc: "ラーメン体操",
+    img: "一杯.png"
+},
+
+{
+    coin: 1000,
+    name: "サイバーパンクフレーム",
+    desc: "電流ビリビリ",
+    img: "サイバー.png"
+},
+
+{
+    coin: 1000,
+    name: "居酒屋たいむ",
+    desc: "大将のお悩み相談",
+    img: "居酒屋.png"
+},
+
+{
+    coin: 1000,
+    name: "わっしょいたいむ",
+    desc: "肘打ち",
+    img: "わっしょい.png"
+},
+
+{
+    coin: 1000,
+    name: "フェスハナビ",
+    desc: "おっぱぶ店長のマイクパフォーマンス",
+    img: "花火.png"
+},
+
+{
+    coin: 1000,
+    name: "虹色のメロディ",
+    desc: "生まれて初めて音楽に乗る（物理）",
+    img: "虹メロ.png"
+},
+
+
+/* =====================================================
+   2000 COIN
+===================================================== */
+
+{
+    coin: 2000,
+    name: "ラブショット",
+    desc: "調味料全混ぜして飲む",
+    img: "ラブショ.png"
+},
+
+{
+    coin: 2000,
+    name: "たいむとセンジョン",
+    desc: "派遣オペラ",
+    img: "セッション.png"
+},
+
+{
+    coin: 2000,
+    name: "マガジンフレーム",
+    desc: "笑点で音ハメ変顔",
+    img: "マガジンフレーム.png"
+},
+
+{
+    coin: 2000,
+    name: "たいむとドライブ",
+    desc: "頭文字D疑似体験",
+    img: "ドライブ.png"
+},
+
+{
+    coin: 2000,
+    name: "たいむと願いごと",
+    desc: "ふーんえっちじゃん//",
+    img: "願い事.png"
+},
+
+
+/* =====================================================
+   3000 COIN
+===================================================== */
+
+{
+    coin: 3000,
+    name: "プロポーズ",
+    desc: "福笑いの後の顔面でプロポーズ",
+    img: "プロポーズ.png"
+},
+
+{
+    coin: 3000,
+    name: "たいむがいっぱい",
+    desc: "私の声をたくさん流す",
+    img: "いっぱい.png"
+},
+
+{
+    coin: 3000,
+    name: "虹のお城",
+    desc: "お姫様にしてよ！",
+    img: "城.png"
+},
+
+{
+    coin: 3000,
+    name: "青春の1ページ",
+    desc: "寝落ち通話しようよ",
+    img: "青春.png"
+},
+
+
+/* =====================================================
+   5000 COIN
+===================================================== */
+
+{
+    coin: 5000,
+    name: "無限大ハート",
+    desc: "いい加減タロット占い",
+    img: "無限大.png"
+},
+
+{
+    coin: 5000,
+    name: "シャンパンタワー",
+    desc: "シャンパンコール",
+    img: "シャンタワ.png"
+},
+
+{
+    coin: 5000,
+    name: "勝利のファンファーレ",
+    desc: "ケツからリコーダーの音が出る",
+    img: "勝利.png"
+},
+
+{
+    coin: 5000,
+    name: "ガラスの靴",
+    desc: "未搭載",
+    img: "ガラス.png"
+},
+
+{
+    coin: 5000,
+    name: "コスモロケット",
+    desc: "ウィーアーでブロワー",
+    img: "ロケット.png"
+},
+
+{
+    coin: 5000,
+    name: "フラワーガーデン",
+    desc: "疑似殺人体験",
+    img: "ガーデン.png"
+},
+
+
+/* =====================================================
+   10000 COIN
+===================================================== */
+
+{
+    coin: 10000,
+    name: "はじける想い",
+    desc: "チェリボム",
+    img: "はじおも.png"
+},
+
+{
+    coin: 10000,
+    name: "スターマイン",
+    desc: "ホットリミット",
+    img: "スタマ.png"
+}
+
+];
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let currentFilter = "all";
+
+const grid =
+    document.getElementById("gift-grid");
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function render() {
+
+    grid.innerHTML = "";
+
+
+    const filtered =
+        giftData.filter(gift => {
+
+            if (currentFilter === "all") {
+                return true;
+            }
+
+            return gift.coin.toString() === currentFilter;
+
+        });
+
+
+    filtered.forEach((gift, index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "card";
+
+
+        /* =========================
+           登場タイミング
+        ========================= */
+
+        card.style.animationDelay =
+            `${index * 55}ms`;
+
+
+        /* =========================
+           未搭載判定
+        ========================= */
+
+        if (gift.desc === "未搭載") {
+
+            card.classList.add("disabled");
+
+        }
+
+
+        card.setAttribute(
+            "data-coin",
+            gift.coin
+        );
+
+
+        /* =========================
+           IMAGE
+        ========================= */
+
+        let imgHTML;
+
+        if (gift.img) {
+
+            imgHTML = `
+
+                <img
+                    src="${gift.img}"
+                    alt="${gift.name}"
+                    class="gift-img"
+
+                    onerror="
+                        this.outerHTML =
+                        '<div class=\\'no-img\\'>No Img</div>'
+                    "
+                >
+
+            `;
+
+        } else {
+
+            imgHTML = `
+
+                <div class="no-img">
+                    No Img
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================
+           DESCRIPTION
+        ========================= */
+
+        let descHTML;
+
+        if (gift.desc === "未搭載") {
+
+            descHTML = `
+
+                <span class="not-installed">
+                    未搭載
+                </span>
+
+            `;
+
+        } else {
+
+            descHTML = `
+
+                <div class="desc">
+                    ${gift.desc}
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        card.innerHTML = `
+
+            ${imgHTML}
+
+            <div class="card-body">
+
+                <div class="card-header">
+
+                    <span class="gift-name">
+                        ${gift.name}
+                    </span>
+
+                    <span class="coin-badge">
+                        ${gift.coin.toLocaleString()}c
+                    </span>
+
+                </div>
+
+                ${descHTML}
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+function filterGifts(coin, button) {
+
+    currentFilter = coin;
+
+
+    document
+        .querySelectorAll(".filter-btn")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+    button.classList.add("active");
+
+
+    render();
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+render();
+
+</script>
+
+</body>
+</html>
